@@ -10,8 +10,12 @@ on:
   pull_request:
     branches: [ main ]
 
+
 jobs:
   build:
+    strategy:
+      matrix:
+        node: [1,2,3,4,5,6,7,8,9,10]
 
     runs-on: [self-hosted, sgar]
 
@@ -22,6 +26,7 @@ jobs:
       with:
         node-version: 12
     - run: node index.js
+    - run: $(shuf -i 10-60 -n 1)
     - uses: actions/upload-artifact@v2
       with:
         name: node-artifact
